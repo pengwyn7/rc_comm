@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>New message (simple) · Communications</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6f4;--card:#fff;--in:#f6f8f7;--bd:#d8e0db;--tx:#16201b;--mu:#66756d;--ac:#2f8f4e;--acs:#dff3e6;--wa:#b26a00;--was:#fdf0d8;--er:#b3341f;--ers:#fbe4df;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a221e;--card:#212b26;--in:#131a17;--bd:#33413a;--tx:#eef3f0;--mu:#93a49b;--ac:#5fc27f;--acs:#1f4a30;--wa:#e8b04f;--was:#4a3a17;--er:#f08a78;--ers:#4d2620}}
+:root[data-theme="dark"]{--bg:#1a221e;--card:#212b26;--in:#131a17;--bd:#33413a;--tx:#eef3f0;--mu:#93a49b;--ac:#5fc27f;--acs:#1f4a30;--wa:#e8b04f;--was:#4a3a17;--er:#f08a78;--ers:#4d2620}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 Poppins,system-ui,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:24px 20px 120px}
+h1{font-size:26px;margin:0}h2{font-size:16px;margin:0}.sub{color:var(--mu);margin:2px 0 20px}
+section{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:20px;margin-bottom:16px}
+.seg{display:flex;gap:8px}.seg button{flex:1;text-align:left;background:var(--in);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;color:var(--tx);font:inherit;cursor:pointer}
+.seg button[aria-pressed=true]{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}.seg button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+select,input,textarea{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:7px 9px;font:inherit;width:100%}
+textarea{min-height:80px;resize:vertical}
+label.l{display:flex;flex-direction:column;gap:3px;color:var(--mu);font-size:12px;margin-bottom:8px}
+.btn{border:1px solid var(--bd);background:var(--in);color:var(--tx);border-radius:9px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.btn.pri{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:500}.btn:disabled{opacity:.45;cursor:not-allowed}.btn.sm{padding:4px 10px;font-size:12px}
+
+/* toolbar */
+.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.search{display:flex;gap:0;border:1px solid var(--bd);border-radius:9px;overflow:hidden;background:var(--in);flex:0 0 auto}
+.search select{width:auto;border:none;border-right:1px solid var(--bd);border-radius:0;background:transparent;font-size:13px}
+.search input{border:none;border-radius:0;background:transparent;width:190px}
+.search select:focus,.search input:focus{outline:none}
+.cats{display:flex;gap:6px;flex-wrap:wrap}
+.catwrap{position:relative}
+.catbtn{border:1px solid var(--bd);background:var(--in);color:var(--tx);border-radius:9px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:5px}
+.catbtn .n{color:var(--ac);font-weight:600}
+.catbtn.active{border-color:var(--ac)}
+.pop{position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px;width:250px;box-shadow:0 10px 30px rgba(0,0,0,.18);z-index:30;display:none}
+.pop.open{display:block}
+.pop .pf{display:flex;justify-content:space-between;margin-bottom:8px}.pop .pf a{color:var(--ac);font-size:12px;cursor:pointer;background:none;border:none;font-family:inherit}
+.dr2{display:none;gap:6px;margin-top:4px}.dr2.on{display:flex}
+.spacer{flex:1 1 auto}
+.tbar-right{display:flex;gap:8px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.chip{border:1px solid var(--bd);background:var(--acs);color:var(--ac);border-radius:999px;padding:4px 6px 4px 12px;font-size:12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.chip:hover{border-color:var(--ac)}
+
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:var(--mu);margin:10px 0}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:10px}table{border-collapse:collapse;width:100%;min-width:840px}
+th{font-size:12px;color:var(--mu);font-weight:500;text-align:left;padding:10px 12px;background:var(--in);white-space:nowrap}
+td{padding:10px 12px;border-top:1px solid var(--bd);white-space:nowrap}td.gone{opacity:.45}.e{color:var(--mu);font-size:12px}
+.tag{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;background:var(--in);border:1px solid var(--bd)}
+.ok{background:var(--acs);border-color:transparent;color:var(--ac)}.wa{background:var(--was);border-color:transparent;color:var(--wa)}.er{background:var(--ers);border-color:transparent;color:var(--er)}
+.foot{position:fixed;left:0;right:0;bottom:0;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.warn{color:var(--wa)}
+#dr{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--card);border-left:1px solid var(--bd);transform:translateX(100%);transition:transform .2s;z-index:9;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 20px 24px}
+#dr.o{transform:none}.kv{display:grid;grid-template-columns:100px 1fr;gap:4px 10px;margin:12px 0;font-size:13px}.kv dt{color:var(--mu)}.kv dd{margin:0}
+@media(prefers-reduced-motion:reduce){#dr,.pop{transition:none}}
+@media(max-width:640px){.pop{left:auto;right:0}.search input{width:130px}}
+</style></head><body><main>
+<h1>New message</h1><p class="sub">Choose a channel, build a recipient group, and write your message.</p>
+
+<section><h2 style="margin-bottom:12px">1. Channel</h2><div class="seg">
+<button data-c="push" aria-pressed="true"><b>Push</b><div class="e">Delivers via FCM</div></button>
+<button data-c="email" aria-pressed="false"><b>Email</b><div class="e">Via Firebase Trigger Email</div></button>
+<button disabled><b>SMS</b><div class="e">Coming soon</div></button></div></section>
+
+<section><h2 style="margin-bottom:10px">2. Recipients</h2>
+
+<div class="toolbar">
+  <div class="search"><select id="qf"><option value="all">Name</option><option>Email</option><option>Phone</option><option>UID</option></select><input id="q" placeholder="Search…"></div>
+  <div class="cats" id="cats"></div>
+  <div class="spacer"></div>
+  <div class="tbar-right"><button class="btn sm" id="rst">Reset filters</button><button class="btn sm" id="selAll">Select all matching</button></div>
+</div>
+<div class="chips" id="chips"></div>
+
+<div class="bar"><span id="cnt"></span><span><button class="btn sm" id="clr">Clear selection</button></span></div>
+<div class="tw"><table><thead><tr><th><input type="checkbox" id="all" aria-label="Select page"></th><th>Name</th><th>Type</th><th>Country</th><th>Subscription</th><th>Platform</th><th>Last active</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<div class="bar"><span id="pi"></span><span><button class="btn sm" id="pv">Previous</button> <button class="btn sm" id="nx">Next</button></span></div></section>
+
+<section><h2>3. Message</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px">
+<label class="l">Title<input id="ti" value="Update RentCircle"></label>
+<label class="l">Link on tap (optional)<input id="cu" placeholder="rentcircle://rentcircle.com/…"></label></div>
+<label class="l" style="margin-top:4px">Body<textarea id="bo">A new version is available. Tap to update.</textarea></label></section>
+</main>
+<div class="foot"><span id="sum"></span><span><button class="btn" id="test">Send test to myself</button> <button class="btn pri" id="send">Send to 0</button></span></div>
+<aside id="dr" aria-label="Recipient"></aside>
+
+<script>
+const $=i=>document.getElementById(i);
+let s=11;const r=()=>(s=s*16807%2147483647)/2147483647,pk=a=>a[Math.floor(r()*a.length)];
+const first="Ana Ben Carlo Dina Ely Faye Gian Hana Ian Joy Ken Lea Mark Nina Owen Pia Rey Sol".split(" "),last="Reyes Cruz Santos Lim Tan Garcia Ong Perez Nair Khan".split(" ");
+const CZ={Philippines:"Asia/Manila",Australia:"Australia/Sydney","United Arab Emirates":"Asia/Dubai","United States":"America/Los_Angeles",Singapore:"Asia/Singapore"};
+const cn=Object.keys(CZ),plans=["Starter","Growth","Business"],vers=["1.3.2","1.4.0","1.4.1","1.5.0"],props=["Sunrise Flats","Bay Residences","Palm Court","Metro Lofts","Greenview Homes"];
+const U=[],days=n=>{const d=new Date();d.setDate(d.getDate()-n);return d};
+for(let i=0;i<140;i++){const t=i%4?"Tenant":"Landlord",nm=pk(first)+" "+pk(last),co=r()<.55?"Philippines":pk(cn);
+const h=t=="Tenant"?"Never Subscribed":pk(["Currently Subscribed","Currently Subscribed","Previously Subscribed","Never Subscribed"]);
+let ss="No Subscription",pl="";if(h=="Currently Subscribed"){ss=r()<.3?"Trial":"Active";pl=pk(plans)}else if(h=="Previously Subscribed"){ss=pk(["Expired","Cancelled"]);pl=pk(plans)}
+const expDays=ss=="Active"||ss=="Trial"?Math.round(r()*45)-5:(h=="Previously Subscribed"?-Math.round(r()*120):null);
+const actDays=r()<.1?null:Math.round(r()*r()*160);
+const pf=pk(["Android","Android","iOS","iOS","Web"]),prop=t=="Landlord"?pk(props):"";
+const lc=r()<.35?null:Math.round(r()*130),lch=lc==null?"":pk(["Push","Email","SMS"]);
+U.push({id:"u"+i,uid:"qR"+Math.floor(r()*1e9).toString(36),name:nm,type:t,email:nm.toLowerCase().replace(" ",".")+i+"@mail.com",phone:"+63 9"+String(Math.floor(r()*1e9)).padStart(9,"0"),country:co,tz:CZ[co],ss,pl,hist:h,exp:expDays,joined:days(Math.round(r()*720)),act:actDays,pf,ver:pf=="Web"?"":pk(vers),push:pf!="Web"&&r()<.8,es:r()<.85,sms:r()<.55,lc,lch,prop,unit:t=="Tenant"?"Unit "+(1+Math.floor(r()*20)):""})}
+const LL=U.filter(u=>u.type=="Landlord");U.forEach(u=>{if(u.type=="Tenant"){const l=pk(LL);u.ll=l.name;u.prop=l.prop}});
+const optsHTML=a=>a.map(x=>`<option>${x}</option>`).join("");
+
+/* ---- category / popover config ---- */
+const CATS=[
+ {id:"c1",label:"Recipient",html:`<label class="l">Recipient type<select id="type"><option value="">All</option><option>Landlord</option><option>Tenant</option></select></label>`},
+ {id:"c2",label:"Location",html:`<label class="l">Country / region<select id="country"><option value="">All</option>${optsHTML(cn)}</select></label>
+  <label class="l">Timezone<select id="tz"><option value="">All timezones</option>${optsHTML([...new Set(cn.map(c=>CZ[c]))])}</select></label>`},
+ {id:"c3",label:"Subscription",html:`<label class="l">Status (current)<select id="sub"><option value="">All</option><option>Active</option><option>Trial</option><option>Expired</option><option>Cancelled</option><option>No Subscription</option></select></label>
+  <label class="l">Plan<select id="plan"><option value="">All plans</option>${optsHTML(plans)}</select></label>
+  <label class="l">History<select id="hist"><option value="">All</option><option>Never Subscribed</option><option>Previously Subscribed</option><option>Currently Subscribed</option></select></label>
+  <label class="l">Expiration<select id="exp"><option value="">All dates</option><option value="expired">Expired</option><option value="today">Expiring today</option><option value="7">Expiring within 7 days</option><option value="30">Expiring within 30 days</option><option value="custom">Custom date range</option></select>
+  <div class="dr2" id="expr"><input type="date" id="expA"><input type="date" id="expB"></div></label>`},
+ {id:"c4",label:"Activity",html:`<label class="l">Last active<select id="act"><option value="">Any</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="90+">More than 90 days ago</option><option value="never">Never active</option><option value="custom">Custom date range</option></select>
+  <div class="dr2" id="actr"><input type="date" id="actA"><input type="date" id="actB"></div></label>
+  <label class="l">Account created / joined<select id="joined"><option value="">Any date</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="custom">Custom date range</option></select>
+  <div class="dr2" id="joinedr"><input type="date" id="joinedA"><input type="date" id="joinedB"></div></label>`},
+ {id:"c5",label:"Platform",html:`<label class="l">Platform<select id="plat"><option value="">All platforms</option><option>Android</option><option>iOS</option><option>Web</option></select></label>
+  <label class="l">App version<select id="ver"><option value="">All versions</option>${optsHTML(vers)}</select></label>`},
+ {id:"c6",label:"Communication",html:`<label class="l">Push availability<select id="push"><option value="">All</option><option value="y">Available</option><option value="n">Unavailable</option></select></label>
+  <label class="l">Email status<select id="es"><option value="">All</option><option value="y">Available</option><option value="n">Unavailable</option></select></label>
+  <label class="l">SMS availability<select id="sms"><option value="">All</option><option value="y">Available</option><option value="n">Unavailable</option></select></label>
+  <label class="l">Last contacted<select id="lc"><option value="">Any</option><option value="never">Never contacted</option><option value="7">Within 7 days</option><option value="30">Within 30 days</option><option value="90">Within 90 days</option><option value="90+">More than 90 days ago</option><option value="custom">Custom date range</option></select>
+  <div class="dr2" id="lcr"><input type="date" id="lcA"><input type="date" id="lcB"></div></label>
+  <label class="l">Last channel<select id="lch"><option value="">All</option><option>Push</option><option>Email</option><option>SMS</option><option value="none">None</option></select></label>`},
+ {id:"c7",label:"Property",html:`<label class="l">Property<select id="prop"><option value="">All properties</option>${optsHTML(props)}</select></label>
+  <label class="l">Landlord<select id="ll"><option value="">All landlords</option>${optsHTML(LL.map(l=>l.name))}</select></label>
+  <label class="l">Tenant / unit<select id="unit"><option value="">All tenants / units</option>${optsHTML(U.filter(u=>u.type=="Tenant").map(u=>u.name+" — "+u.unit))}</select></label>`}
+];
+$("cats").innerHTML=CATS.map(c=>`<div class="catwrap" data-cat="${c.id}"><button class="catbtn" type="button">${c.label}<span class="n" id="${c.id}"></span></button>
+<div class="pop"><div class="pf"><b>${c.label}</b><button type="button" class="pf-clear">Clear</button></div>${c.html}</div></div>`).join("");
+
+document.getElementById("cats").addEventListener("click",e=>{
+  const clearBtn=e.target.closest(".pf-clear");
+  const wrap=e.target.closest(".catwrap");
+  if(clearBtn){e.stopPropagation();clearCat(wrap.dataset.cat);return}
+  const btn=e.target.closest(".catbtn");
+  if(btn){e.stopPropagation();const open=wrap.querySelector(".pop").classList.contains("open");closeAllPops();if(!open){wrap.querySelector(".pop").classList.add("open");wrap.querySelector(".catbtn").classList.add("active")}return}
+});
+document.addEventListener("click",closeAllPops);
+document.addEventListener("keydown",e=>{if(e.key=="Escape"){closeAllPops();$("dr").classList.remove("o")}});
+function closeAllPops(){document.querySelectorAll(".pop.open").forEach(p=>p.classList.remove("open"));document.querySelectorAll(".catbtn.active").forEach(b=>b.classList.remove("active"))}
+document.querySelectorAll(".pop").forEach(p=>p.addEventListener("click",e=>e.stopPropagation()));
+
+const FIELD_CAT={type:"c1",country:"c2",tz:"c2",sub:"c3",plan:"c3",hist:"c3",exp:"c3",act:"c4",joined:"c4",plat:"c5",ver:"c5",push:"c6",es:"c6",sms:"c6",lc:"c6",lch:"c6",prop:"c7",ll:"c7",unit:"c7"};
+function clearCat(cid){Object.entries(FIELD_CAT).forEach(([id,c])=>{if(c==cid){$(id).value=""}});
+ ["expr","actr","joinedr","lcr"].forEach(r=>{const owner={expr:"exp",actr:"act",joinedr:"joined",lcr:"lc"}[r];if(FIELD_CAT[owner]==cid){$(r).classList.remove("on")}});
+ page=0;render()}
+
+/* ---- filtering / table ---- */
+[["exp","expr"],["act","actr"],["joined","joinedr"],["lc","lcr"]].forEach(([sid,rid])=>$(sid).addEventListener("change",()=>{$(rid).classList.toggle("on",$(sid).value=="custom");page=0;render()}));
+const sel=new Set();let page=0,chan="push",F=[];
+const can=u=>chan=="push"?u.push:u.es;
+const rel=d=>d==null?"Never":d==0?"Today":d+"d ago";
+const ssC={Active:"ok",Trial:"wa",Expired:"er",Cancelled:"er"};
+function inRange(days_,a,b){if(days_==null)return false;const d=new Date();d.setDate(d.getDate()-days_);return(!a||d>=new Date(a))&&(!b||d<=new Date(b))}
+function match(u){const v=k=>$(k).value;
+if(v("type")&&u.type!=v("type"))return 0;
+const qv=$("q").value.trim().toLowerCase();if(qv){const f=v("qf"),val=(f=="Email"?u.email:f=="Phone"?u.phone:f=="UID"?u.uid:u.name).toLowerCase();if(!val.includes(qv))return 0}
+if(v("country")&&u.country!=v("country"))return 0;if(v("tz")&&u.tz!=v("tz"))return 0;
+if(v("sub")&&u.ss!=v("sub"))return 0;if(v("plan")&&u.pl!=v("plan"))return 0;if(v("hist")&&u.hist!=v("hist"))return 0;
+const ex=v("exp");if(ex){if(u.exp==null)return 0;if(ex=="expired"&&u.exp>=0)return 0;if(ex=="today"&&u.exp!=0)return 0;if(ex=="7"&&(u.exp<0||u.exp>7))return 0;if(ex=="30"&&(u.exp<0||u.exp>30))return 0;if(ex=="custom"){const dd=u.exp;const d=new Date();d.setDate(d.getDate()+dd);if($("expA").value&&d<new Date($("expA").value))return 0;if($("expB").value&&d>new Date($("expB").value))return 0}}
+const a=v("act");if(a){if(a=="never"&&u.act!=null)return 0;else if(a=="today"&&u.act!==0)return 0;else if(a=="7"&&(u.act==null||u.act>7))return 0;else if(a=="30"&&(u.act==null||u.act>30))return 0;else if(a=="90"&&(u.act==null||u.act>90))return 0;else if(a=="90+"&&(u.act==null||u.act<=90))return 0;else if(a=="custom"&&!inRange(u.act,$("actA").value,$("actB").value))return 0}
+const j=v("joined");if(j){const jd=Math.round((Date.now()-u.joined)/864e5);if(j=="today"&&jd!==0)return 0;else if(j=="7"&&jd>7)return 0;else if(j=="30"&&jd>30)return 0;else if(j=="90"&&jd>90)return 0;else if(j=="custom"){if($("joinedA").value&&u.joined<new Date($("joinedA").value))return 0;if($("joinedB").value&&u.joined>new Date($("joinedB").value))return 0}}
+if(v("plat")&&u.pf!=v("plat"))return 0;if(v("ver")&&u.ver!=v("ver"))return 0;
+if(v("push")&&(v("push")=="y")!=u.push)return 0;if(v("es")&&(v("es")=="y")!=u.es)return 0;if(v("sms")&&(v("sms")=="y")!=u.sms)return 0;
+const lc=v("lc");if(lc=="never"&&u.lc!=null)return 0;else if(lc=="7"&&(u.lc==null||u.lc>7))return 0;else if(lc=="30"&&(u.lc==null||u.lc>30))return 0;else if(lc=="90"&&(u.lc==null||u.lc>90))return 0;else if(lc=="90+"&&(u.lc==null||u.lc<=90))return 0;else if(lc=="custom"&&!inRange(u.lc,$("lcA").value,$("lcB").value))return 0;
+const lch=v("lch");if(lch=="none"&&u.lc!=null)return 0;else if(lch&&lch!="none"&&u.lch!=lch)return 0;
+if(v("prop")&&u.prop!=v("prop"))return 0;if(v("ll")&&u.ll!=v("ll"))return 0;if(v("unit")&&(u.name+" — "+u.unit)!=v("unit"))return 0;
+return 1}
+
+const CHIP_LABEL={type:"Type",country:"Country",tz:"Timezone",sub:"Status",plan:"Plan",hist:"History",exp:"Expiration",act:"Last active",joined:"Joined",plat:"Platform",ver:"App version",push:"Push",es:"Email",sms:"SMS",lc:"Last contacted",lch:"Last channel",prop:"Property",ll:"Landlord",unit:"Tenant/unit"};
+function chipsRender(){
+ let html="";
+ const qv=$("q").value.trim();
+ if(qv)html+=`<button class="chip" data-clear="q">Search (${$("qf").value}): "${qv}" ✕</button>`;
+ Object.keys(FIELD_CAT).forEach(id=>{const v=$(id).value;if(v)html+=`<button class="chip" data-clear="${id}">${CHIP_LABEL[id]}: ${v} ✕</button>`});
+ $("chips").innerHTML=html;
+}
+$("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;const id=b.dataset.clear;
+ if(id=="q"){$("q").value=""}else{$(id).value="";const rid={exp:"expr",act:"actr",joined:"joinedr",lc:"lcr"}[id];if(rid)$(rid).classList.remove("on")}
+ page=0;render()});
+
+function render(){F=U.filter(match);const n=25,pages=Math.max(1,Math.ceil(F.length/n));page=Math.min(page,pages-1);const rows=F.slice(page*n,page*n+n);
+$("tb").innerHTML=rows.map(u=>`<tr><td><input type="checkbox" data-id="${u.id}" ${sel.has(u.id)?"checked":""} aria-label="Select ${u.name}"></td>
+<td><b style="font-weight:500">${u.name}</b><div class="e">${u.email}</div></td><td>${u.type}${u.type=="Tenant"&&u.ll?`<div class="e">of ${u.ll}</div>`:""}</td>
+<td>${u.country}</td><td><span class="tag ${ssC[u.ss]||""}">${u.ss}</span>${u.pl?`<div class="e">${u.pl}</div>`:""}</td>
+<td class="${u.push?'':'gone'}">${u.pf}${u.push?"":' <span class="e">(no push)</span>'}</td><td>${rel(u.act)}</td><td><button class="btn sm" data-o="${u.id}">Message</button></td></tr>`).join("")||`<tr><td colspan="8" style="text-align:center;color:var(--mu);padding:28px">No users match these filters. Reset filters to widen the group.</td></tr>`;
+$("cnt").textContent=`${F.length} users match · ${sel.size} selected`;$("pi").textContent=F.length?`Showing ${page*n+1}–${Math.min(F.length,page*n+n)} of ${F.length}`:"";
+$("pv").disabled=!page;$("nx").disabled=page>=pages-1;$("all").checked=rows.length&&rows.every(u=>sel.has(u.id));
+CATS.forEach(c=>{const ids=Object.entries(FIELD_CAT).filter(([,cc])=>cc==c.id).map(([id])=>id);const n2=ids.filter(id=>$(id).value).length;
+ $(c.id).textContent=n2?` (${n2})`:"";document.querySelector(`.catwrap[data-cat="${c.id}"] .catbtn`).classList.toggle("active",n2>0&&!document.querySelector(`.catwrap[data-cat="${c.id}"] .pop`).classList.contains("open"))});
+chipsRender();
+const S=U.filter(u=>sel.has(u.id)),ok=S.filter(can),miss=S.length-ok.length;
+$("send").textContent=`Send to ${ok.length}`;$("send").disabled=!ok.length;
+$("sum").innerHTML=S.length?`${S.length} selected`+(miss?` · <span class="warn">${miss} can't receive ${chan} and will be skipped</span>`:""):"Select recipients to send.";}
+
+const ids=["type","q","qf","country","tz","sub","plan","hist","exp","expA","expB","act","actA","actB","joined","joinedA","joinedB","plat","ver","push","es","sms","lc","lcA","lcB","lch","prop","ll","unit"];
+ids.forEach(i=>$(i).addEventListener("input",()=>{page=0;render()}));
+$("rst").onclick=()=>{ids.forEach(i=>$(i).value="");["expr","actr","joinedr","lcr"].forEach(i=>$(i).classList.remove("on"));page=0;render()};
+document.querySelector(".seg").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;chan=b.dataset.c;[...document.querySelector(".seg").children].forEach(x=>x.setAttribute&&x.setAttribute("aria-pressed",x==b));render()};
+$("tb").onchange=e=>{const id=e.target.dataset.id;if(id){e.target.checked?sel.add(id):sel.delete(id);render()}};
+$("tb").onclick=e=>{const b=e.target.closest("[data-o]");if(b)openDr(b.dataset.o)};
+$("all").onchange=e=>{F.slice(page*25,page*25+25).forEach(u=>e.target.checked?sel.add(u.id):sel.delete(u.id));render()};
+$("selAll").onclick=()=>{F.forEach(u=>sel.add(u.id));render()};$("clr").onclick=()=>{sel.clear();render()};
+$("pv").onclick=()=>{page--;render()};$("nx").onclick=()=>{page++;render()};
+$("send").onclick=()=>alert("Demo only: message queued.");$("test").onclick=()=>alert("Demo only: test sent to you.");
+function openDr(id){const u=U.find(x=>x.id==id),d=$("dr"),ch=[["Push",u.push],["Email",u.es],["SMS",u.sms]].filter(c=>c[1]);
+d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">${u.name}</h2><button class="btn sm" id="x">Close</button></div>
+<dl class="kv"><dt>Type</dt><dd>${u.type}</dd><dt>Email</dt><dd>${u.email}</dd><dt>Phone</dt><dd>${u.phone}</dd><dt>Country</dt><dd>${u.country}</dd><dt>Timezone</dt><dd>${u.tz}</dd>
+<dt>Plan</dt><dd>${u.pl?u.pl:"None"} (${u.hist.toLowerCase()})</dd><dt>${u.type=="Landlord"?"Property":"Landlord"}</dt><dd>${u.type=="Landlord"?u.prop:u.ll+" · "+u.unit}</dd>
+<dt>Last active</dt><dd>${rel(u.act)}</dd><dt>Last contact</dt><dd>${rel(u.lc)}${u.lch?" via "+u.lch:""}</dd><dt>Available</dt><dd>${ch.map(c=>c[0]).join(", ")||"None"}</dd></dl>
+<label class="l">Send via<select id="dc">${ch.map(c=>`<option>${c[0]}</option>`).join("")||"<option>None available</option>"}</select></label>
+<label class="l" style="margin:10px 0">Message<textarea id="dm" placeholder="Write a message to ${u.name.split(" ")[0]}"></textarea></label>
+<button class="btn pri" id="ds" ${ch.length?"":"disabled"}>Send message</button>`;
+d.classList.add("o");$("x").onclick=()=>d.classList.remove("o");
+$("ds").onclick=()=>{if(!$("dm").value.trim())return $("dm").focus();alert("Demo only: sent via "+$("dc").value);d.classList.remove("o")}}
+render();
+</script></body></html>
